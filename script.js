@@ -6,8 +6,8 @@ function add_error_highlighting() {
 function validator() {
     let name = document.getElementById("name").value;
     let email = document.getElementById("email").value;
-    let contact_number = document.getElementById("contact_number").value;
-    let message = document.getElementById("message").value;
+    let password = document.getElementById("password").value;
+    let dob = document.getElementById("dob").value;
     let error_message = document.getElementById("error_message");
 
     let errors = 0;
@@ -21,7 +21,7 @@ function validator() {
         errors++;
     }
 
-    if (contact_number.length < 10) {
+    if (password.length < 10) {
         text = "Please enter a valid contact number.";
         error_message.innerText += `\n${text}`;
         add_error_highlighting();
@@ -34,8 +34,8 @@ function validator() {
         add_error_highlighting();
         errors++;
     }
-    if (message.length < 10) {
-        text = "Message must be at least 10 characters long.";
+    if ((new Date() - new Date(dob)) / 31536000000 < 18 || (new Date() - new Date(dob)) / 31536000000 > 55) {
+        text = "Age must be from 18 years to 55 years!";
         error_message.innerText += `\n${text}`;
         add_error_highlighting();
         errors++;
@@ -44,7 +44,7 @@ function validator() {
     if (errors > 0) {
         return false;
     }
-    alert("Thank you for your message!");
+    alert("Thank you for your entry!");
     return true;
 }
 
@@ -63,14 +63,14 @@ function writeNewEntry() {
     let list_entries = fetchFromStorage();
     let name = document.getElementById("name").value;
     let email = document.getElementById("email").value;
-    let contact_number = document.getElementById("contact_number").value;
-    let message = document.getElementById("message").value;
+    let password = document.getElementById("password").value;
+    let dob = document.getElementById("dob").value;
 
     let new_entry = {
         "name": name,
         "email": email,
-        "contact_number": contact_number,
-        "message": message,
+        "password": password,
+        "dob": dob,
     }
 
     list_entries.push(new_entry);
@@ -82,7 +82,7 @@ function showEntries() {
     let list_entries = fetchFromStorage();
     let html_string = "";
     list_entries.map((ele, index) => {
-        html_string += `<tr><td class="border px-4 py-2">${index+1}</td><td class="border px-4 py-2">${ele.name}</td><td class="border px-4 py-2">${ele.email}</td><td class="border px-4 py-2">${ele.contact_number}</td><td class="border px-4 py-2">${ele.message}</td><td><button class="hover:cursor-pointer text-white px-5 py-3 rounded-md" onclick="deleteEntry(${index})">&#x274C;</button></td></tr>`;
+        html_string += `<tr><td class="border px-4 py-2">${index+1}</td><td class="border px-4 py-2">${ele.name}</td><td class="border px-4 py-2">${ele.email}</td><td class="border px-4 py-2">${ele.password}</td><td class="border px-4 py-2">${ele.dob}</td><td><button class="hover:cursor-pointer text-white px-5 py-3 rounded-md" onclick="deleteEntry(${index})">&#x274C;</button></td></tr>`;
     })
     document.getElementById("entries").innerHTML = html_string;
 }
@@ -112,7 +112,14 @@ function validate() {
     }
 }
 
-function clearContents() {
+function clearErrorContents() {
     document.getElementById("error_message").innerText = "";
     document.getElementById("error_message").classList.remove("text-red-500", "font-bold", "font-sans", "border-2", "my-2", "rounded-md", "py-3", "px-5", "border-red-500", "hover:bg-red-500", "hover:text-white");
+}
+
+function clearForm() {
+    document.getElementById("name").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("password").value = "";
+    document.getElementById("dob").value = "";
 }
