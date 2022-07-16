@@ -10,34 +10,38 @@ function validator() {
     let message = document.getElementById("message").value;
     let error_message = document.getElementById("error_message");
 
-    let settings = document.getElementById("message").classList;
+    let errors = 0;
 
     let text;
 
     if (name.length < 3) {
         text = "Name must be at least 3 characters long.";
-        error_message.innerText = text;
+        error_message.innerText += `\n${text}`;
         add_error_highlighting();
-        return false;
+        errors++;
     }
 
     if (contact_number.length < 10) {
         text = "Please enter a valid contact number.";
-        error_message.innerTextHTML = text;
+        error_message.innerText += `\n${text}`;
         add_error_highlighting();
-        return false;
+        errors++;
     }
 
     if (email.indexOf("@") == -1 || email.length < 6) {
         text = "Please enter a valid email address.";
-        error_message.innerTextHTML = text;
+        error_message.innerText += `\n${text}`;
         add_error_highlighting();
-        return false;
+        errors++;
     }
     if (message.length < 10) {
         text = "Message must be at least 10 characters long.";
-        error_message.innerText = text;
+        error_message.innerText += `\n${text}`;
         add_error_highlighting();
+        errors++;
+    }
+
+    if (errors > 0) {
         return false;
     }
     alert("Thank you for your message!");
@@ -106,4 +110,9 @@ function validate() {
     if (validator()) {
         writeNewEntry();
     }
+}
+
+function clearContents() {
+    document.getElementById("error_message").innerText = "";
+    document.getElementById("error_message").classList.remove("text-red-500", "font-bold", "font-sans", "border-2", "my-2", "rounded-md", "py-3", "px-5", "border-red-500", "hover:bg-red-500", "hover:text-white");
 }
