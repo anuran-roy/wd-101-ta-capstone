@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Appointment Form</title>
+</head>
+
+<body>
+    <div class="p-5 content-center items-center bg-gradient-to-b from-sky-500 to-gray-900 via-blue-700 w-100 h-screen">
+        <div id="error_message"></div>
+        <h1 class="text-6xl font-bold text-center text-white p-5">Appointment Form</h1>
+        <div class="grid md:grid-cols-2 grid-cols-1 p-5 content-center align-center">
+            <div id="userForm" class="rounded-md border-2 p-5 m-5 text-white right-0 left-0 align-middle bg-blend-lighten">
+                <div>
+                    <label for="name">Name:</label><br>
+                    <input type="text" name="name" id="name"
+                        class="my-3 px-5 py-3 border-2 hover:border-sky-500 text-gray-500 bg-gray-100 rounded-md"
+                        placeholder="John Doe">
+                </div>
+                <div>
+                    <label for="email">Email:</label><br>
+                    <input class="my-3 px-5 py-3 border-2 hover:border-sky-500 text-gray-500 bg-gray-100 rounded-md"
+                        type="email" name="email" id="email">
+                </div>
+                <div>
+                    <label for="contact_number">Contact Number:</label><br>
+                    <input class="my-3 px-5 py-3 border-2 hover:border-sky-500 text-gray-500 bg-gray-100 rounded-md"
+                        type="tele" name="contact_number" id="contact_number">
+                </div>
+                <div>
+                    <label for="message">Message:</label><br>
+                    <textarea class="my-3 px-5 py-3 border-2 hover:border-sky-500 text-gray-500 bg-gray-100 rounded-md"
+                        name="message" id="message"></textarea>
+                </div>
+                <button type="submit" onclick="validate();"
+                    class="hover:cursor-pointer border-2 hover:bg-white hover:text-gray-800 px-5 py-3 rounded-md">Submit</button>
+            </div>
+            <div id="table-menu" class="rounded-md p-5 m-5 border-2">
+                <button onclick="showEntries();"
+                    class="px-3 mx-3 hover:cursor-pointer border-2 hover:border-green-500 text-white hover:bg-green-500 px-5 py-3 rounded-md">Show
+                    Entries</button>
+                <button onclick="hideEntries();"
+                class="px-3 mx-3 hover:cursor-pointer border-2 hover:border-orange-500 text-white hover:bg-orange-500 px-5 py-3 rounded-md">Hide
+                Entries</button>
+                <button onclick="clearEntries();"
+                class="px-3 mx-3 hover:cursor-pointer border-2 hover:border-red-500 text-white hover:bg-red-500 px-5 py-3 rounded-md">Delete All
+                Entries</button>
+                <table id="entries_table" class="table-auto text-white p-5 m-5">
+                    <thead>
+                        <tr>
+                            <th class="px-4 py-2">Sl. No</th>
+                            <th class="px-4 py-2">Name</th>
+                            <th class="px-4 py-2">Email</th>
+                            <th class="px-4 py-2">Contact Number</th>
+                            <th class="px-4 py-2">Message</th>
+                    </thead>
+                    <tbody id="entries">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="./script.js"></script>
+</body>
+
+</html>
